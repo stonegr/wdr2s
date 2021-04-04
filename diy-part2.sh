@@ -15,5 +15,6 @@
 sed -i 's/192.168.1.1/192.168.2.1/g' package/base-files/files/bin/config_generate
 sed -i 's/root::0:0:99999:7:::/root:$1$ZzLkZmEb$Kpkpyxaj6bYCEtrs7LqWs.:18612:0:99999:7:::/g' package/base-files/files/etc/shadow
 rm -rf feeds/packages/net/smartdns
-sed -i 's/ucidef_set_interface_lan 'eth0'/ucidef_set_interface_lan 'eth1'/g' package/base-files/files/etc/board.d/99-default_network
-sed -i 's/ucidef_set_interface_wan 'eth1'/ucidef_set_interface_wan 'eth0'/g' package/base-files/files/etc/board.d/99-default_network
+sed -i '12s/eth0/eth1/g' package/base-files/files/etc/board.d/99-default_network
+sed -i '13s/eth1/eth0/g' package/base-files/files/etc/board.d/99-default_network
+sed -i '13s/eth0 /eth1 /g' package/base-files/files/etc/board.d/99-default_network
