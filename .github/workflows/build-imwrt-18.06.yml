@@ -1,4 +1,4 @@
-name: build-imwrt-21.02
+name: build-imwrt-18.06
 on: 
   repository_dispatch:
   workflow_dispatch:
