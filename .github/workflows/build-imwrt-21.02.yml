@@ -46,7 +46,7 @@ jobs:
       run: |
         [ -e $FEEDS_CONF ] && mv $FEEDS_CONF /home/runner/openwrt/feeds.conf.default
         chmod +x $DIY_P1_SH
-        cd openwrt
+        cd /home/runner/openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
  
     - name: Update feeds
@@ -60,7 +60,7 @@ jobs:
         [ -e files ] && mv files /home/runner/openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE /home/runner/openwrt/.config
         chmod +x $DIY_P2_SH
-        cd openwrt
+        cd /home/runner/openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
 
     - name: Build
