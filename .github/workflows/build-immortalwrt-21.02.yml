@@ -9,7 +9,7 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v2
-    - name: Init Building Dependencies
+    - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
