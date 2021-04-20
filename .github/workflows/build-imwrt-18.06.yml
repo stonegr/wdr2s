@@ -5,27 +5,42 @@ on:
   schedule:
     - cron: 30 16 * * *
 
+env:
+  FEEDS_CONF: feeds.conf.default
+  DIY_P1_SH: diy-part1.sh
+  DIY_P2_SH: diy-part2.sh
+  UPLOAD_BIN_DIR: true
+  UPLOAD_FIRMWARE: true
+  UPLOAD_COWTRANSFER: true
+  UPLOAD_WETRANSFER: true
+  UPLOAD_RELEASE: true
+  TZ: Asia/Shanghai
+
 jobs:
   build:
     runs-on: ubuntu-18.04
+
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
-    - name: Init Building Dependencies
+    - name: Checkout
+      uses: actions/checkout@main
+
+    - name: Initialization environment
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        docker rmi $(docker images -q)
-        sudo -E apt-get remove -y --purge azure-cli ghc zulu* hhvm llvm* firefox google* dotnet* powershell mysql* php* mssql-tools msodbcsql17 android*
-        sudo -E apt-get update -y
-        sudo -E apt-get full-upgrade -y
-        sudo -E apt-get install -y build-essential asciidoc binutils bzip2 coreutils gawk gettext git libncurses5-dev libz-dev patch unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-8 gcc++-8 gcc-8-multilib g++-8-multilib p7zip p7zip-full msmtp libssl-dev texinfo libreadline-dev libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint ccache curl wget vim nano python python3 python-pip python3-pip python-ply python3-ply haveged lrzsz device-tree-compiler scons antlr3 gperf ecj fastjar re2c xz-utils tar
-        for i in $(ls /usr/bin/*-8); do sudo -E ln -sf $i ${i%%-8*}; done
-        sudo -E ln -sf /usr/include/asm-generic /usr/include/asm
-        sudo -E apt-get autoremove -y --purge
-        sudo -E apt-get clean -y
-        sudo -E swapoff -a
-        sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /usr/local/lib/android /opt/ghc /swapfile
+        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo -E apt-get -qq update
+        sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-1804)
+        sudo -E apt-get -qq autoremove --purge
+        sudo -E apt-get -qq clean
+        sudo timedatectl set-timezone "$TZ"
+    
+    - name: Load custom feeds
+      run: |
+        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF /home/runner/openwrt/feeds.conf.default
+        chmod +x $DIY_P1_SH
+        cd /home/runner/openwrt
+        $GITHUB_WORKSPACE/$DIY_P1_SH
     - name: Clone Source
       run: |
         cd "/home/runner"
@@ -34,6 +49,13 @@ jobs:
         cd "/home/runner/openwrt"
         ./scripts/feeds update -a
         ./scripts/feeds install -a
+    - name: Load custom configuration
+      run: |
+        [ -e files ] && mv files /home/runner/openwrt/files
+        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE /home/runner/openwrt/.config
+        chmod +x $DIY_P2_SH
+        cd /home/runner/openwrt
+        $GITHUB_WORKSPACE/$DIY_P2_SH
     - name: Build
       run: |
         cd "/home/runner/openwrt"
