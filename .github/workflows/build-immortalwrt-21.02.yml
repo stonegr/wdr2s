@@ -1,10 +1,12 @@
-name: NanoPi R2S OpenWrt
+name: build-imwrt-21.02
 on: 
   repository_dispatch:
   workflow_dispatch:
+  schedule:
+    - cron: 30 16 * * *
 
 jobs:
-  OpenWrt-18_06:
+  build:
     runs-on: ubuntu-18.04
     steps:
     - name: Checkout Repository
