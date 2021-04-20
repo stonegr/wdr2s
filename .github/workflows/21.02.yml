@@ -39,8 +39,9 @@ jobs:
         cd "/home/runner/openwrt"
         cp -f "${GITHUB_WORKSPACE}/1.config" ".config"
         make defconfig
-        make -j$[$(nproc)+1]
-  - name: Check space usage
+        make -j$(nproc) || make -j1 || make -j1 V=s
+
+    - name: Check space usage
       if: (!cancelled())
       run: df -hT
 
