@@ -31,7 +31,7 @@ jobs:
         cd "/home/runner/openwrt"
         ./scripts/feeds update -a
         ./scripts/feeds install -a
-    - name: Build OpenWrt-21.02
+    - name: Build
       run: |
         cd "/home/runner/openwrt"
         cp -f "${GITHUB_WORKSPACE}/1.config" ".config"
