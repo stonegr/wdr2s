@@ -15,7 +15,7 @@
 
 # Add a feed source
 #sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-#git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
+git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
 git clone https://github.com/fw876/helloworld.git package/helloworld
 git clone https://github.com/vernesong/OpenClash.git package/OpenClash
 git clone https://github.com/pymumu/smartdns.git package/smartdns
@@ -28,4 +28,4 @@ git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 git clone https://github.com/stonegr/luci-app-eqos.git package/luci-app-eqos
 #git clone https://github.com/stonegr/small.git package/small
 
-sed -i '$a src-git passwall https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
+#sed -i '$a src-git passwall https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
