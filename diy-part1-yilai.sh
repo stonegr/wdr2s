@@ -27,4 +27,3 @@ git clone https://github.com/rosywrt/luci-theme-rosy.git package/luci-theme-rosy
 git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 git clone https://github.com/stonegr/luci-app-eqos.git package/luci-app-eqos
 #git clone https://github.com/stonegr/small.git package/small
-sed -i '$a src-git openwrt-passwall https://github.com/xiaorouji/openwrt-passwall.git' feeds.conf.default
