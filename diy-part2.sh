@@ -19,4 +19,4 @@ sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/
 #sed -i '12s/eth0/eth1/g' package/base-files/files/etc/board.d/99-default_network
 #sed -i '13s/eth1/eth0/g' package/base-files/files/etc/board.d/99-default_network
 #sed -i '13s/eth0 /eth1 /g' package/base-files/files/etc/board.d/99-default_network
-sed -i '$a src-link passwall ./package/passwall' feeds.conf.default && ./scripts/feeds update -a && ./scripts/feeds install -a
+sed -i '$a src-link passwall ./package/openwrt-passwall' feeds.conf.default && ./scripts/feeds update passwall && ./scripts/feeds install -a-p passwall
