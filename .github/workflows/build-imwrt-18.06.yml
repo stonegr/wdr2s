@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build OpenWrt r2s-imwrt-20.06
+name: Build OpenWrt r2s-imwrt-18.06
 
 on:
   repository_dispatch:
@@ -37,7 +37,7 @@ env:
 
 jobs:
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
 
     steps:
     - name: Checkout
