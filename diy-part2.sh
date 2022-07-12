@@ -12,7 +12,7 @@
 
 # Modify default IP
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
-sed -i 's/192.168.1.1/192.168.6.180/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.100.180/g' package/base-files/files/bin/config_generate
 sed -i 's/root::0:0:99999:7:::/root:$1$ZzLkZmEb$Kpkpyxaj6bYCEtrs7LqWs.:18612:0:99999:7:::/g' package/base-files/files/etc/shadow
 rm -rf feeds/packages/net/smartdns
 sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/etc/board.d/02_network
