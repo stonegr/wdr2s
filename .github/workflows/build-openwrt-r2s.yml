@@ -129,11 +129,13 @@ jobs:
         name: OpenWrt_base${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin/packages/arm_cortex-a7_neon-vfpv4/base
 
+    - name: do .config
+      run: |
+        [ -e "openwrt/.config" ] && cp -f openwrt/.config openwrt/config.txt
+
     - name: Upload .config
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
-      run: |
-        [ -e "openwrt/.config" ] && cp -f openwrt/.config openwrt/config.txt
       with:
         name: OpenWrt_base${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/config.txt
