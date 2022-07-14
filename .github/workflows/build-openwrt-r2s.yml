@@ -132,9 +132,11 @@ jobs:
     - name: Upload .config
       uses: actions/upload-artifact@main
       if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true'
+      run: |
+        [ -e "openwrt/.config" ] && cp -f openwrt/.config openwrt/config.txt
       with:
         name: OpenWrt_base${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: openwrt/.config
+        path: openwrt/config.txt
         
     - name: Organize files
       id: organize
