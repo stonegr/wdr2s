@@ -30,7 +30,7 @@ sed -i 's/ulimit -n 65535/#ulimit -n 65535/g' package/openwrt_passwall_luci/luci
 
 #添加自定义配置
 sed -i '/config_get port "$section" "port" "6053"/a\conf_append "speed-check-mode" "tcp:443"\nconf_append "serve-expired-ttl" "120"' package/smartdns/package/openwrt/files/etc/init.d/smartdns
-sed -i '/config_get port "$section" "port" "6053"/a\conf_append "tcp-idle-time" "10"' package/smartdns/package/openwrt/files/etc/init.d/smartdns
+sed -i '/config_get port "$section" "port" "6053"/a\conf_append "tcp-idle-time" "120"' package/smartdns/package/openwrt/files/etc/init.d/smartdns
 
 #关闭最小ttl
 sed -i '/config_get rr_ttl_min "$section" "rr_ttl_min" ""/a\rr_ttl_min=""' package/smartdns/package/openwrt/files/etc/init.d/smartdns
