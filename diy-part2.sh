@@ -19,3 +19,23 @@ sed -i "s,'eth1' 'eth0','eth0' 'eth1',g" target/linux/rockchip/armv8/base-files/
 #sed -i '12s/eth0/eth1/g' package/base-files/files/etc/board.d/99-default_network
 #sed -i '13s/eth1/eth0/g' package/base-files/files/etc/board.d/99-default_network
 #sed -i '13s/eth0 /eth1 /g' package/base-files/files/etc/board.d/99-default_network
+
+#passwall
+#添加
+sed -i '/CONFIG=passwall/a\ulimit -u unlimited\nulimit -n 1000000' package/openwrt_passwall_luci/luci-app-passwall/root/usr/share/passwall/app.sh
+sed -i 's/ulimit -n 65535/#ulimit -n 65535/g' package/openwrt_passwall_luci/luci-app-passwall/root/usr/share/passwall/app.sh
+
+#删除
+sed -i '/ulimit -u unlimited/d;/ulimit -n 1000000/d' package/openwrt_passwall_luci/luci-app-passwall/root/usr/share/passwall/app.sh
+
+
+sed -i '/config_get port "$section" "port" "6053"/a\conf_append "speed-check-mode" "tcp:443"\nconf_append "serve-expired-ttl" "120"' package/smartdns/package/openwrt/files/etc/init.d/smartdns
+# 关闭最小ttl
+sed -i '/config_get rr_ttl_min "$section" "rr_ttl_min" ""/a\rr_ttl_min=""'package/smartdns/package/openwrt/files/etc/init.d/smartdns
+
+#文件数打开
+sed -i '/\$SMARTDNS_CONF \$args/i\procd_set_param limits nofile="1000000 1000000"' package/smartdns/package/openwrt/files/etc/init.d/smartdns
+
+#去除最小ttl
+sed -i 's/o.placeholder = "300"/--o.placeholder = "300"/g' package/luci-app-smartdns/luasrc/model/cbi/smartdns/smartdns.lua
+sed -i 's/o.default     = 300/--o.default     = 300/g' package/luci-app-smartdns/luasrc/model/cbi/smartdns/smartdns.lua
