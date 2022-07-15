@@ -26,3 +26,4 @@ git clone https://github.com/Leo-Jo-My/luci-theme-opentomcat.git package/luci-th
 git clone https://github.com/rosywrt/luci-theme-rosy.git package/luci-theme-rosy
 git clone https://github.com/destan19/OpenAppFilter.git package/OpenAppFilter
 git clone https://github.com/stonegr/luci-app-eqos.git package/luci-app-eqos
+git clone https://github.com/stonegr/mosdns.git package/mosdns
