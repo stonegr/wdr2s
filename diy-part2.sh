@@ -26,7 +26,7 @@ sed -i '/CONFIG=passwall/a\ulimit -u unlimited\nulimit -n 1000000' package/openw
 sed -i 's/ulimit -n 65535/#ulimit -n 65535/g' package/openwrt_passwall_luci/luci-app-passwall/root/usr/share/passwall/app.sh
 
 #删除
-sed -i '/ulimit -u unlimited/d;/ulimit -n 1000000/d' package/openwrt_passwall_luci/luci-app-passwall/root/usr/share/passwall/app.sh
+# sed -i '/ulimit -u unlimited/d;/ulimit -n 1000000/d' package/openwrt_passwall_luci/luci-app-passwall/root/usr/share/passwall/app.sh
 
 
 sed -i '/config_get port "$section" "port" "6053"/a\conf_append "speed-check-mode" "tcp:443"\nconf_append "serve-expired-ttl" "120"' package/smartdns/package/openwrt/files/etc/init.d/smartdns
