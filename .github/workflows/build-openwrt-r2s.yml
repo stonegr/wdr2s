@@ -113,7 +113,7 @@ jobs:
 
     - name: Check space usage
       if: (!cancelled())
-      run: df -hT
+      run: df -hT & cp -f openwrt/.config openwrt/bin/targets/*/*/config.txt
 
     - name: Upload bin directory
       uses: actions/upload-artifact@main
@@ -128,10 +128,6 @@ jobs:
       with:
         name: OpenWrt_base${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/bin/packages/*/base
-
-    - name: do .config
-      run: |
-        [ -e "openwrt/.config" ] && cp -f openwrt/.config openwrt/bin/targets/*/*/.config
         
     - name: Organize files
       id: organize
