@@ -38,6 +38,6 @@ sed -i '/config_get rr_ttl_min "$section" "rr_ttl_min" ""/a\rr_ttl_min=""' packa
 #文件数打开
 sed -i '/\$SMARTDNS_CONF \$args/i\procd_set_param limits nofile="1000000 1000000"' package/smartdns/package/openwrt/files/etc/init.d/smartdns
 
- 去除最小ttl
+# 去除最小ttl
 sed -i 's/o.placeholder = "300"/--o.placeholder = "300"/g' package/luci-app-smartdns/luasrc/model/cbi/smartdns/smartdns.lua
 sed -i 's/o.default     = 300/--o.default     = 300/g' package/luci-app-smartdns/luasrc/model/cbi/smartdns/smartdns.lua
