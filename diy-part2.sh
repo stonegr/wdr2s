@@ -41,3 +41,6 @@ sed -i '/\$SMARTDNS_CONF \$args/i\procd_set_param limits nofile="1000000 1000000
 # 去除最小ttl
 sed -i 's/o.placeholder = "300"/--o.placeholder = "300"/g' package/luci-app-smartdns/luasrc/model/cbi/smartdns/smartdns.lua
 sed -i 's/o.default     = 300/--o.default     = 300/g' package/luci-app-smartdns/luasrc/model/cbi/smartdns/smartdns.lua
+
+# 更改内核版本
+sed -i 's/5.18/5.15/g' target/linux/rockchip/Makefile
