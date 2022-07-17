@@ -113,7 +113,7 @@ jobs:
 
     - name: Check space usage
       if: (!cancelled())
-      run: df -hT & cp -f openwrt/.config openwrt/bin/targets/*/*/config.txt
+      run: df -hT & cp -f openwrt/.config openwrt/bin/targets/rockchip/armv8/config.txt
 
     - name: Upload bin directory
       uses: actions/upload-artifact@main
